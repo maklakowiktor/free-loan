@@ -9,7 +9,18 @@ _italic_
 ##### Header five
 ###### Header six
 
-[Google](http://www.google.com/)
+[Google]: http://www.google.com/
+
+[Link to google line][Google]
+
+
+[CH][coursehunter]
+
+[coursehunter]: www.coursehunter.org
+
+
+![A pretty tiger](https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg)
+
 
 
 
