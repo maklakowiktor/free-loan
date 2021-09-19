@@ -13,8 +13,8 @@
       <div class="quiz__flex-container">
         <div class="quiz__column-left">
           <!-- Step .. -->
-          <StepI v-show="currentStep === 1" />
-          <StepII v-show="currentStep === 2" />
+          <StepI v-show="currentStep === 1" :cached-data="cacheData" />
+          <StepII @next="nextStep" v-show="currentStep === 2" :cached-data="cacheData" />
 
           <div class="quiz__bottom-line"></div>
 
@@ -26,7 +26,13 @@
               @click="nextStep"
               >Дальше</a
             >
-            <a v-else href="javascript:void(0)" class="quiz__prev-btn" @click="previousStep">назад</a>
+            <a
+              v-else
+              href="javascript:void(0)"
+              class="quiz__prev-btn"
+              @click="previousStep"
+              >назад</a
+            >
           </div>
         </div>
 
@@ -54,7 +60,6 @@
             </div>
 
             <GiftBar :currentStep="currentStep" />
-            
           </div>
         </div>
       </div>
@@ -94,6 +99,12 @@ export default {
         DOM: null,
         value: null,
       },
+      result: {
+        stepI: [],
+        stepII: [],
+        stepIII: [],
+        stepIV: [],
+      },
     };
   },
   mounted() {
@@ -115,6 +126,26 @@ export default {
     },
     previousStep() {
       this.currentStep--;
+    },
+    cacheData(data, stepNumber) {
+      switch (stepNumber) {
+        case "I":
+          this.result.stepI.push(data);
+        break;
+        case "II":
+          this.result.stepI.push(data);
+        break;
+        case "III":
+          this.result.stepI.push(data);
+        break;
+        case "IV":
+          this.result.stepI.push(data);
+        break;
+        default:
+          
+        break;
+      }
+      console.log(this.result);
     },
   },
   computed: {

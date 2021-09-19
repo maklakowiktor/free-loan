@@ -29,6 +29,9 @@ import CustomCheckbox from "../CustomElements/CustomCheckbox.vue";
 
 export default {
   name: "StepI",
+  props: {
+    cacheData: Function
+  },
   components: {
     CustomCheckbox,
   },
@@ -55,14 +58,11 @@ export default {
 
       this.selectedOptions = tempOptions;
       console.log(this.selectedOptions);
+      this.cacheData(this.selectedOptions, "I");
     },
   },
 };
 
-/*
-    Если опция не выбрана, перебираем массив.
-        Если найденный элемент совпадает с текущим выбранным, то удаляем первый 
-*/
 </script>
 
 <style scoped>

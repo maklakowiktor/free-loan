@@ -29,6 +29,9 @@ import CustomButton from "../CustomElements/CustomButton.vue";
 
 export default {
   name: "StepI",
+  props: {
+    cacheData: null
+  },
   components: {
     CustomButton,
   },
@@ -43,6 +46,8 @@ export default {
       const isSelected = e.target.checked;
       let tempOptions = this.selectedOptions;
 
+      console.log(isSelected);
+
       if (isSelected) {
         tempOptions.push(value);
       } else {
@@ -54,15 +59,12 @@ export default {
       }
 
       this.selectedOptions = tempOptions;
-      console.log(this.selectedOptions);
+      this.cacheData(this.selectedOptions, "II");
+
+      this.$emit("next");
     },
   },
 };
-
-/*
-    Если опция не выбрана, перебираем массив.
-        Если найденный элемент совпадает с текущим выбранным, то удаляем первый 
-*/
 </script>
 
 <style scoped>
