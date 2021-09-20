@@ -11,21 +11,31 @@
       </div>
       <div class="header__right_column">
         <a class="header__phone" href="/"> +7 (921) <span>921-21-21</span> </a>
-        <a href="/" class="header__callback">перезвоните</a>
+        <a href="javascript:void(0)" class="header__callback" @click="openModalWindow">перезвоните</a>
       </div>
     </div>
+    <ModalWindow v-show="this.modalState" :openModalWindow="openModalWindow" />
   </header>
 </template>
 
 <script>
+import ModalWindow from "./ModalWindow.vue";
+
 export default {
   name: "Header",
+  components: {
+    ModalWindow
+  },
   data() {
     return {
-      state: 1,
+      modalState: false
     };
   },
-  methods: {},
+  methods: {
+    openModalWindow() {
+      this.modalState = !this.modalState;
+    }
+  }
 };
 </script>
 

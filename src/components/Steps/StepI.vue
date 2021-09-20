@@ -30,7 +30,7 @@ import CustomCheckbox from "../CustomElements/CustomCheckbox.vue";
 export default {
   name: "StepI",
   props: {
-    cacheData: Function
+    cacheData: null
   },
   components: {
     CustomCheckbox,

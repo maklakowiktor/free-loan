@@ -59,6 +59,7 @@ export default {
       }
 
       this.selectedOptions = tempOptions;
+      
       this.cacheData(this.selectedOptions, "II");
 
       this.$emit("next");

@@ -14,7 +14,11 @@
         <div class="quiz__column-left">
           <!-- Step .. -->
           <StepI v-show="currentStep === 1" :cached-data="cacheData" />
-          <StepII @next="nextStep" v-show="currentStep === 2" :cached-data="cacheData" />
+          <StepII
+            @next="nextStep"
+            v-show="currentStep === 2"
+            :cached-data="cacheData"
+          />
 
           <div class="quiz__bottom-line"></div>
 
@@ -131,19 +135,18 @@ export default {
       switch (stepNumber) {
         case "I":
           this.result.stepI.push(data);
-        break;
+          break;
         case "II":
           this.result.stepI.push(data);
-        break;
+          break;
         case "III":
           this.result.stepI.push(data);
-        break;
+          break;
         case "IV":
           this.result.stepI.push(data);
-        break;
+          break;
         default:
-          
-        break;
+          break;
       }
       console.log(this.result);
     },
@@ -369,6 +372,7 @@ export default {
 }
 
 .quiz__progress-line {
+  position: relative;
   margin: 25px 0 25px 0;
   width: 0;
   height: 4px;
@@ -380,8 +384,9 @@ export default {
 .quiz__progress-line:after {
   content: "";
   display: block;
-  position: relative;
+  position: absolute;
   top: -10px;
+  right: 0;
   width: 24px;
   height: 24px;
   background-color: #ffe923;
