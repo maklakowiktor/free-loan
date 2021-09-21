@@ -6,29 +6,51 @@
     <div class="quiz__container">
       <div class="quiz__progress">
         <div
-          class="quiz__progress-line"
+          :class="{ 'quiz__progress-line': true, 'done': this.currentStep != 5 }"
           :style="{ width: calcProgressWidth }"
         ></div>
       </div>
       <div class="quiz__flex-container">
         <div class="quiz__column-left">
-          <!-- Step .. -->
-          <StepI v-show="currentStep === 1" :cached-data="cacheData" />
+          <!-- Steps .. -->
+          <StepI v-show="currentStep === 1" :cache-data="cacheData" />
           <StepII
             @next="nextStep"
             v-show="currentStep === 2"
-            :cached-data="cacheData"
+            :cache-data="cacheData"
+          />
+          <StepIII
+            @next="nextStep"
+            v-show="currentStep === 3"
+            :cache-data="cacheData"
+          />
+          <StepIV
+            @next="nextStep"
+            v-show="currentStep === 4"
+            :cache-data="cacheData"
+          />
+          <StepV
+            @next="nextStep"
+            v-show="currentStep === 5"
+            :cache-data="cacheData"
           />
 
-          <div class="quiz__bottom-line"></div>
+          <div v-if="currentStep != 5" class="quiz__bottom-line"></div>
 
           <div class="quiz__flex-btn-container">
             <a
               v-if="currentStep === 1"
               href="javascript:void(0)"
-              class="quiz__btn"
+              class="quiz__btn next"
               @click="nextStep"
               >Дальше</a
+            >
+            <a
+              v-else-if="currentStep === 5"
+              href="javascript:void(0)"
+              class="quiz__btn"
+              style="margin-top: 1.5rem"
+              >Узнать результат</a
             >
             <a
               v-else
@@ -38,6 +60,16 @@
               >назад</a
             >
           </div>
+          <div
+            v-if="currentStep === 5"
+            style="
+              width: 100%;
+              height: 1px;
+              display: block;
+              margin-top: 16px;
+              border-bottom: 1px solid rgba(214, 214, 214, 0.1);
+            "
+          ></div>
         </div>
 
         <div class="quiz__column-right">
@@ -73,6 +105,10 @@
 <script>
 import StepI from "./Steps/StepI.vue";
 import StepII from "./Steps/StepII.vue";
+import StepIII from "./Steps/StepIII.vue";
+import StepIV from "./Steps/StepIV.vue";
+import StepV from "./Steps/StepV.vue";
+
 import GiftBar from "./GiftBar.vue";
 
 export default {
@@ -83,6 +119,9 @@ export default {
   components: {
     StepI,
     StepII,
+    StepIII,
+    StepIV,
+    StepV,
     GiftBar,
   },
   data() {
@@ -137,13 +176,13 @@ export default {
           this.result.stepI.push(data);
           break;
         case "II":
-          this.result.stepI.push(data);
+          this.result.stepII.push(data);
           break;
         case "III":
-          this.result.stepI.push(data);
+          this.result.stepIII.push(data);
           break;
         case "IV":
-          this.result.stepI.push(data);
+          this.result.stepIV.push(data);
           break;
         default:
           break;
@@ -303,7 +342,7 @@ export default {
   cursor: pointer;
 }
 
-.quiz__btn:after {
+.quiz__btn.next:after {
   content: "";
   display: inline-block;
   background: url("../assets/arrow.svg") no-repeat;
@@ -381,6 +420,23 @@ export default {
   transition: all 0.5s ease-in-out;
 }
 
+.quiz__progress-line.done:before {
+  background: url();
+}
+
+.quiz__progress-line:before {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: -4px;
+  width: 24px;
+  height: 24px;
+  display: block;
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg width='15' height='12' viewBox='0 0 15 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.9996 8.58621L1.7066 5.29321L0.292603 6.70721L4.9996 11.4142L14.7066 1.70721L13.2926 0.293213L4.9996 8.58621Z' fill='black'/%3E%3C/svg%3E%0A");
+}
+
 .quiz__progress-line:after {
   content: "";
   display: block;
@@ -410,12 +466,10 @@ export default {
   width: 30%;
   text-align: center;
   background: rgba(0, 0, 0, 0.2);
-  min-height: 500px;
   padding: 10px;
 }
 
 .quiz__answer-gift {
-  position: relative;
   display: block;
   position: relative;
   min-height: 500px;

@@ -1,31 +1,31 @@
 <template>
   <div class="quiz__step">
-    <div class="quiz__type-label">Выберите тип долга</div>
-    <CustomCheckbox
-      name="step_1_1"
-      value="Алименты, ущерб"
+    <div class="quiz__type-label">Выберите официальный доход</div>
+    <CustomButton
+      value="До 30 000₽"
+      name="step_4_1"
       :selectOption="selectOption"
     />
-    <CustomCheckbox
-      name="step_1_2"
-      value="Кредит, займ"
+    <CustomButton
+      value="30 000₽ - 50 000₽"
+      name="step_4_2"
       :selectOption="selectOption"
     />
-    <CustomCheckbox
-      name="step_1_3"
-      value="Автокредит, ипотека"
+    <CustomButton
+      value="Более 50 000₽"
+      name="step_4_3"
       :selectOption="selectOption"
     />
-    <CustomCheckbox
-      name="step_1_4"
-      value="Коммунальные платежи, налоги"
+    <CustomButton
+      name="step_4_4"
+      value="Нет"
       :selectOption="selectOption"
     />
   </div>
 </template>
 
 <script>
-import CustomCheckbox from "../CustomElements/CustomCheckbox.vue";
+import CustomButton from "../CustomElements/CustomButton.vue";
 
 export default {
   name: "StepI",
@@ -33,7 +33,7 @@ export default {
     cacheData: null
   },
   components: {
-    CustomCheckbox,
+    CustomButton,
   },
   data() {
     return {
@@ -57,25 +57,28 @@ export default {
       }
 
       this.selectedOptions = tempOptions;
-      console.log(this.selectedOptions);
       
-      this.cacheData(this.selectedOptions, "I");
+      this.cacheData(this.selectedOptions, "II");
+
+      this.$emit("next");
     },
   },
 };
-
 </script>
 
 <style scoped>
 .quiz__type-label {
-  font-family: 'Roboto', sans-serif;
   text-transform: uppercase;
   height: 115px;
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
   font-size: 32px;
   line-height: 40px;
   font-weight: 900;
+}
+
+.quiz__step {
+  /* display: flex; */
+  /* justify-content: center; */
 }
 </style>

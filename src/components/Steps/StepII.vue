@@ -7,17 +7,17 @@
       :selectOption="selectOption"
     />
     <CustomButton
-      name="step_2_1"
+      name="step_2_2"
       value="300 000₽ - 700 000₽"
       :selectOption="selectOption"
     />
     <CustomButton
-      name="step_2_1"
+      name="step_2_3"
       value="700 000₽ - 1 500 000₽"
       :selectOption="selectOption"
     />
     <CustomButton
-      name="step_2_1"
+      name="step_2_4"
       value="Более 1 500 000₽"
       :selectOption="selectOption"
     />
@@ -45,8 +45,6 @@ export default {
       const value = e.target.value;
       const isSelected = e.target.checked;
       let tempOptions = this.selectedOptions;
-
-      console.log(isSelected);
 
       if (isSelected) {
         tempOptions.push(value);

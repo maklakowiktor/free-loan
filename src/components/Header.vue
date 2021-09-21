@@ -10,7 +10,7 @@
         </a>
       </div>
       <div class="header__right_column">
-        <a class="header__phone" href="/"> +7 (921) <span>921-21-21</span> </a>
+        <a class="header__phone" href="/"> +7 (800) <span>200-84-71</span> </a>
         <a href="javascript:void(0)" class="header__callback" @click="openModalWindow">перезвоните</a>
       </div>
     </div>
