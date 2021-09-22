@@ -127,7 +127,7 @@ export default {
   },
   data() {
     return {
-      currentStep: 5,
+      currentStep: 1,
       giftLabel: [
         { label: "Чек лист", topic: '"Как отшить коллекторов"', cases: 700 },
         { label: "Приведи друга", topic: "Получи 5 000₽", cases: 850 },
