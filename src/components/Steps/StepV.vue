@@ -3,12 +3,11 @@
     <div class="quiz__type-label">Введите ваш телефон</div>
     <div class="quiz__phone-wrapper">
       <input
-        type="text"
+        type="tel"
         class="quiz__phone-input"
         placeholder="8 (___) ___-__-__"
-        maxlength="17"
+        maxlength="18"
         autocomplete="off"
-        @input="isValid"
         v-model="value"
       />
     </div>
@@ -29,6 +28,8 @@
 </template>
 
 <script>
+import PhoneMask from "../../lib/phone_mask";
+
 export default {
   name: "StepI",
   props: {
@@ -38,69 +39,17 @@ export default {
     return {
       selectedOptions: [],
       value: "",
+      phoneMask: null,
     };
   },
-  methods: {
-    isNumericInput(event) {
-      const key = event.keyCode;
-      return (
-        (key >= 48 && key <= 57) || // Allow number line
-        (key >= 96 && key <= 105) // Allow number pad
-      );
-    },
-    isModifierKey(event) {
-      const key = event.keyCode;
-      console.log(key);
-      return (
-        event.shiftKey === true ||
-        key === 35 ||
-        key === 36 || // Allow Shift, Home, End
-        key === 8 ||
-        key === 9 ||
-        key === 13 ||
-        key === 46 || // Allow Backspace, Tab, Enter, Delete
-        (key > 36 && key < 41) || // Allow left, up, right, down
-        // Allow Ctrl/Command + A,C,V,X,Z
-        ((event.ctrlKey === true || event.metaKey === true) &&
-          (key === 65 || key === 67 || key === 86 || key === 88 || key === 90))
-      );
-    },
-    enforceFormat(event) {
-      // Input must be of a valid number format or a modifier key, and not longer than ten digits
-      if (!this.isNumericInput(event) && !this.isModifierKey(event)) {
-        event.preventDefault();
-      }
-    },
-    isValid(event) {
-      if (this.isModifierKey(event)) return;
-
-      //8 (999) 250-64-98         // length: 17
-      const input = this.value.replace(/\D/g, "").substring(0, 17); // First ten digits of input only
-      const phoneNumber = {};
-
-      // Example
-      //012345678910
-      //89992506498
-      phoneNumber.header = input.substring(1, 4); // 999
-      phoneNumber.section = input.substring(4, 7); // 250
-      phoneNumber.footerI = input.substring(7, 9); // 64
-      phoneNumber.footerII = input.substring(9, 11); // 98
-
-      console.log(phoneNumber);
-
-      if (input.length > 9) {
-        this.value = `${input[0]} (${phoneNumber.header}) ${phoneNumber.section}-${phoneNumber.footerI}-${phoneNumber.footerII}`;
-      } else if (input.length > 6) {
-        this.value = `${input[0]} (${phoneNumber.header}) ${phoneNumber.section}-${phoneNumber.footerI}`;
-      } else if (input.length > 3) {
-        this.value = `${input[0]} (${phoneNumber.header}) ${phoneNumber.section}`;
-      } else if (input.length > 0) {
-        this.value = `${input[0]} (${phoneNumber.header}`;
-      }
-    },
-    mounted() {
-
-    },
+  methods: {},
+  mounted() {
+    const $phoneNumberInput = document.querySelector("input[type=tel]");
+    this.phoneMask = new PhoneMask({
+      el: $phoneNumberInput,
+      country: "ru",
+      noMask: false,
+    });
   },
 };
 </script>

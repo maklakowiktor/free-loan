@@ -34,6 +34,7 @@
             v-show="currentStep === 5"
             :cache-data="cacheData"
           />
+          <div class="quiz__checkbox"></div>
 
           <div v-if="currentStep != 5" class="quiz__bottom-line"></div>
 
@@ -126,7 +127,7 @@ export default {
   },
   data() {
     return {
-      currentStep: 1,
+      currentStep: 5,
       giftLabel: [
         { label: "Чек лист", topic: '"Как отшить коллекторов"', cases: 700 },
         { label: "Приведи друга", topic: "Получи 5 000₽", cases: 850 },
