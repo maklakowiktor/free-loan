@@ -2,22 +2,22 @@
   <div class="quiz__step">
     <div class="quiz__type-label">Выберите сумму долга</div>
     <CustomButton
-      name="step_2_1"
+      name="step_2"
       value="До 300 000₽"
       :selectOption="selectOption"
     />
     <CustomButton
-      name="step_2_2"
+      name="step_2"
       value="300 000₽ - 700 000₽"
       :selectOption="selectOption"
     />
     <CustomButton
-      name="step_2_3"
+      name="step_2"
       value="700 000₽ - 1 500 000₽"
       :selectOption="selectOption"
     />
     <CustomButton
-      name="step_2_4"
+      name="step_2"
       value="Более 1 500 000₽"
       :selectOption="selectOption"
     />

@@ -38,9 +38,7 @@ export default {
   display: inline-block;
   font-size: 18px;
   line-height: 24px;
-  width: 49%;
   height: 33px;
-  max-width: 49%;
   margin-bottom: 100px;
   vertical-align: top;
   cursor: pointer;

@@ -2,22 +2,22 @@
   <div class="quiz__step">
     <div class="quiz__type-label">Выберите количество кредитов</div>
     <CustomButton
-      name="step_3_1"
+      name="step_3"
       value="1"
       :selectOption="selectOption"
     />
     <CustomButton
-      name="step_3_2"
+      name="step_3"
       value="2"
       :selectOption="selectOption"
     />
     <CustomButton
-      name="step_3_3"
+      name="step_3"
       value="3"
       :selectOption="selectOption"
     />
     <CustomButton
-      name="step_3_4"
+      name="step_3"
       value="Более 3"
       :selectOption="selectOption"
     />

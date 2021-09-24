@@ -66,8 +66,7 @@ input[type="radio"] {
   padding: 20px 0;
   line-height: 28px;
   height: 33px;
-  width: 49%;
-  max-width: 49%;
+  width: 100%;
   vertical-align: top;
   margin-bottom: 80px;
   cursor: pointer;

@@ -3,21 +3,21 @@
     <div class="quiz__type-label">Выберите официальный доход</div>
     <CustomButton
       value="До 30 000₽"
-      name="step_4_1"
+      name="step_4"
       :selectOption="selectOption"
     />
     <CustomButton
       value="30 000₽ - 50 000₽"
-      name="step_4_2"
+      name="step_4"
       :selectOption="selectOption"
     />
     <CustomButton
       value="Более 50 000₽"
-      name="step_4_3"
+      name="step_4"
       :selectOption="selectOption"
     />
     <CustomButton
-      name="step_4_4"
+      name="step_4"
       value="Нет"
       :selectOption="selectOption"
     />

@@ -6,34 +6,34 @@
     <div class="quiz__container">
       <div class="quiz__progress">
         <div
-          :class="{ 'quiz__progress-line': true, 'done': this.currentStep != 5 }"
+          :class="{ 'quiz__progress-line': true, done: this.currentStep != 5 }"
           :style="{ width: calcProgressWidth }"
         ></div>
       </div>
       <div class="quiz__flex-container">
         <div class="quiz__column-left">
-          <!-- Steps .. -->
-          <StepI v-show="currentStep === 1" :cache-data="cacheData" />
-          <StepII
-            @next="nextStep"
-            v-show="currentStep === 2"
-            :cache-data="cacheData"
-          />
-          <StepIII
-            @next="nextStep"
-            v-show="currentStep === 3"
-            :cache-data="cacheData"
-          />
-          <StepIV
-            @next="nextStep"
-            v-show="currentStep === 4"
-            :cache-data="cacheData"
-          />
-          <StepV
-            @next="nextStep"
-            v-show="currentStep === 5"
-            :cache-data="cacheData"
-          />
+          <form action="send.php" method="post">
+            <!-- Steps .. -->
+            
+            <!-- props: ['quizType', 'quizOption', 'quizStep'] -->
+            
+            <Step
+              :key="currentStep - 1"
+              :current-step-obj="quizes[currentStep - 1]"
+              :quiz-step="currentStep"
+              :next="nextStep"
+
+              :cache-data="cacheData" 
+            />
+
+            <a
+              v-if="currentStep === 5"
+              href="javascript:void(0)"
+              class="quiz__btn"
+              style="margin-top: 1.5rem"
+              >Узнать результат</a
+            >
+          </form>
           <div class="quiz__checkbox"></div>
 
           <div v-if="currentStep != 5" class="quiz__bottom-line"></div>
@@ -47,14 +47,7 @@
               >Дальше</a
             >
             <a
-              v-else-if="currentStep === 5"
-              href="javascript:void(0)"
-              class="quiz__btn"
-              style="margin-top: 1.5rem"
-              >Узнать результат</a
-            >
-            <a
-              v-else
+              v-else-if="currentStep != 5"
               href="javascript:void(0)"
               class="quiz__prev-btn"
               @click="previousStep"
@@ -104,13 +97,10 @@
   </section>
 </template>
 <script>
-import StepI from "./Steps/StepI.vue";
-import StepII from "./Steps/StepII.vue";
-import StepIII from "./Steps/StepIII.vue";
-import StepIV from "./Steps/StepIV.vue";
-import StepV from "./Steps/StepV.vue";
-
+import Step from "./Step.vue";
 import GiftBar from "./GiftBar.vue";
+
+import quizData from "../data/quiz_data.json";
 
 export default {
   name: "Quiz",
@@ -118,16 +108,13 @@ export default {
     title: String,
   },
   components: {
-    StepI,
-    StepII,
-    StepIII,
-    StepIV,
-    StepV,
     GiftBar,
+    Step
   },
   data() {
     return {
       currentStep: 1,
+      quizes: [],
       giftLabel: [
         { label: "Чек лист", topic: '"Как отшить коллекторов"', cases: 700 },
         { label: "Приведи друга", topic: "Получи 5 000₽", cases: 850 },
@@ -151,6 +138,10 @@ export default {
       },
     };
   },
+  created() {
+    this.quizes = quizData.quizes; // Считываю массив данных из json'а
+    // console.log(this.quizes[0]);
+  },
   mounted() {
     this.progressBar.DOM = document.querySelector(".quiz__progress"); // Получаю доступ к DOM-элементу прогрессбара
     this.progressBar.value = this.progressBar.DOM.clientWidth; // Извлекаю ширину прогрессбара
@@ -158,7 +149,7 @@ export default {
     window.addEventListener("resize", this.resizeProgressBar);
   },
   destroyed() {
-    // Очистка памяти
+    
     this.progressBar.DOM.removeEventListener("resize", this.resizeProgressBar);
   },
   methods: {
@@ -172,29 +163,32 @@ export default {
       this.currentStep--;
     },
     cacheData(data, stepNumber) {
-      switch (stepNumber) {
-        case "I":
-          this.result.stepI.push(data);
-          break;
-        case "II":
-          this.result.stepII.push(data);
-          break;
-        case "III":
-          this.result.stepIII.push(data);
-          break;
-        case "IV":
-          this.result.stepIV.push(data);
-          break;
-        default:
-          break;
-      }
-      console.log(this.result);
+      // switch (stepNumber) {
+      //   case 1:
+      //     this.result.stepI.push(data);
+      //     break;
+      //   case 2:
+      //     this.result.stepII.push(data);
+      //     break;
+      //   case 3:
+      //     this.result.stepIII.push(data);
+      //     break;
+      //   case 4:
+      //     this.result.stepIV.push(data);
+      //     break;
+      //   default:
+      //     break;
+      // }
+      console.log(this.result, data, stepNumber);
     },
   },
   computed: {
     calcProgressWidth() {
       return ((this.currentStep - 1) * this.progressBar.value) / 4 + "px";
     },
+    getQuizes() {
+      return this.quizes;
+    }
   },
 };
 </script>
